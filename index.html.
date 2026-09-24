@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Birthday Surprise 💗</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    min-height:100vh;
+    background:repeating-linear-gradient(
+        0deg,
+        #ffffff 0px,
+        #ffffff 45px,
+        #f8d6df 45px,
+        #f8d6df 85px
+    );
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:#5a3b4d;
+}
+
+.box{
+    width:92%;
+    max-width:700px;
+    max-height:92vh;
+    overflow:auto;
+    background:rgba(255,255,255,.96);
+    padding:30px 20px;
+    border-radius:28px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.hidden{
+    display:none;
+}
+
+.heart{
+    font-size:55px;
+    animation:beat 1s infinite;
+}
+
+@keyframes beat{
+    50%{
+        transform:scale(1.15);
+    }
+}
+
+h1{
+    color:#e75480;
+    font-size:32px;
+}
+
+h2{
+    color:#e75480;
+}
+
+p{
+    font-size:18px;
+    line-height:1.6;
+}
+
+input{
+    width:85%;
+    padding:14px;
+    border:2px solid #efa9bd;
+    border-radius:12px;
+    font-size:18px;
+    text-align:center;
+    outline:none;
+    margin:12px 0;
+}
+
+button{
+    border:0;
+    padding:13px 25px;
+    margin:8px;
+    border-radius:25px;
+    font-size:17px;
+    background:#e75480;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.no{
+    background:#888;
+}
+
+.memory-title{
+    margin-top:5px;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-top:20px;
+}
+
+.memory{
+    background:#fff0f5;
+    padding:8px;
+    border-radius:18px;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+
+.memory img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    border-radius:14px;
+    display:block;
+}
+
+.caption{
+    font-size:14px;
+    color:#765366;
+    margin:8px 3px;
+}
+
+.final{
+    background:#fff0f5;
+    padding:20px;
+    border-radius:18px;
+    margin-top:20px;
+}
+
+@media(max-width:550px){
+
+    .gallery{
+        grid-template-columns:1fr;
+    }
+
+    .memory img{
+        height:360px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+
+<!-- PASSCODE PAGE -->
+
+<div class="box" id="passcodePage">
+
+    <div class="heart">💗</div>
+
+    <h1>Something Special... 🎀</h1>
+
+    <p>
+        This surprise is only for you. 🔐
+    </p>
+
+    <input
+        type="password"
+        id="passcode"
+        placeholder="Enter Passcode"
+    >
+
+    <br>
+
+    <button onclick="checkPasscode()">
+        Unlock 💕
+    </button>
+
+    <p id="wrong" style="color:red;"></p>
+
+</div>
+
+
+<!-- YES / NO PAGE -->
+
+<div class="box hidden" id="questionPage">
+
+    <div class="heart">🥰</div>
+
+    <h1>Hey You! 💗</h1>
+
+    <p>
+        I have something special for you...
+        <br><br>
+        Are you ready for your surprise?
+    </p>
+
+    <button onclick="yesClicked()">
+        YES 💖
+    </button>
+
+    <button class="no" onclick="noClicked()">
+        NO 🙈
+    </button>
+
+</div>
+
+
+<!-- NO PAGE -->
+
+<div class="box hidden" id="noPage">
+
+    <div class="heart">🥺</div>
+
+    <h1>Are you sure? 😭</h1>
+
+    <p>
+        Please think again...
+        <br><br>
+        There is something special waiting for you! 💗
+    </p>
+
+    <button onclick="backToQuestion()">
+        Okay, YES 💖
+    </button>
+
+</div>
+
+
+<!-- BIRTHDAY PAGE -->
+
+<div class="box hidden" id="birthdayPage">
+
+    <div class="heart">🎂🎉</div>
+
+    <h1>Happy Birthday! 💗</h1>
+
+    <p>
+        Today is all about you! 🥰
+    </p>
+
+    <p>
+        May your life always be filled with
+        happiness, smiles and beautiful memories. 🌸
+    </p>
+
+    <button onclick="showSpecialMessage()">
+        Continue 💕
+    </button>
+
+</div>
+
+
+<!-- SPECIAL MESSAGE -->
+
+<div class="box hidden" id="messagePage">
+
+    <div class="heart">💐</div>
+
+    <h1>Special Message 💌</h1>
+
+    <div class="final">
+
+        <p>
+            You are a really special person. 💗
+        </p>
+
+        <p>
+            Thank you for all the beautiful
+            memories, laughs and moments. 🥹❤️
+        </p>
+
+        <p>
+            I hope your birthday brings you
+            countless reasons to smile. 😊
+        </p>
+
+        <p>
+            ✨ Stay Happy & Stay Amazing ✨
+        </p>
+
+    </div>
+
+    <button onclick="showMemories()">
+        Our Memories 📸💕
+    </button>
+
+</div>
+
+
+<!-- MEMORIES -->
+
+<div class="box hidden" id="memoriesPage">
+
+    <div class="heart">📸</div>
+
+    <h1 class="memory-title">
+        Our Memories 💕
+    </h1>
+
+    <p>
+        Some moments are too special to forget... 🥰
+    </p>
+
+
+    <div class="gallery">
+
+        <div class="memory">
+            <img src="images/memory1.jpg">
+            <p class="caption">
+                A beautiful memory 💗
+            </p>
+        </div>
+
+        <div class="memory">
+            <img src="images/memory2.jpg">
+            <p class="caption">
+                Always keep smiling 😊
+            </p>
+        </div>
+
+        <div class="memory">
+            <img src="images/memory3.jpg">
+            <p class="caption">
+                A special moment ✨
+            </p>
+        </div>
+
+        <div class="memory">
+            <img src="images/memory4.jpg">
+            <p class="caption">
+                Beautiful memories 💕
+            </p>
+        </div>
+
+        <div class="memory">
+            <img src="images/memory5.jpg">
+            <p class="caption">
+                Good times 🌸
+            </p>
+        </div>
+
+        <div class="memory">
+            <img src="images/memory6.jpg">
+            <p class="caption">
+                A moment to remember 🥰
+            </p>
+        </div>
+
+        <div class="memory">
+            <img src="images/memory7.jpg">
+            <p class="caption">
+                One more beautiful memory 💖
+            </p>
+        </div>
+
+        <div class="memory">
+            <img src="images/memory8.jpg">
+            <p class="caption">
+                Happiness & smiles 😊
+            </p>
+        </div>
+
+        <div class="memory">
+            <img src="images/memory9.jpg">
+            <p class="caption">
+                Forever memorable 💐
+            </p>
+        </div>
+
+        <div class="memory">
+            <img src="images/memory10.jpg">
+            <p class="caption">
+                A precious memory ✨
+            </p>
+        </div>
+
+    </div>
+
+
+    <button onclick="showFinal()">
+        One Last Message 💝
+    </button>
+
+</div>
+
+
+<!-- FINAL PAGE -->
+
+<div class="box hidden" id="finalPage">
+
+    <div class="heart">💖✨</div>
+
+    <h1>One Last Thing... 💌</h1>
+
+    <div class="final">
+
+        <p>
+            No matter where life takes you,
+            always keep smiling. 😊
+        </p>
+
+        <p>
+            You deserve all the happiness
+            in the world. 💕
+        </p>
+
+        <p>
+            Thank you for being a beautiful
+            part of these memories. 🥹
+        </p>
+
+        <h2>
+            Happy Birthday Once Again! 🎂🎉
+        </h2>
+
+        <p>
+            💗 Stay Happy & Stay Amazing 💗
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function showPage(page){
+
+    document.querySelectorAll(".box").forEach(function(box){
+        box.classList.add("hidden");
+    });
+
+    document.getElementById(page).classList.remove("hidden");
+}
+
+
+function checkPasscode(){
+
+    const code =
+        document.getElementById("passcode").value;
+
+    /* PASSCODE = 2429 */
+
+    if(code === "2429"){
+
+        showPage("questionPage");
+
+    }else{
+
+        document.getElementById("wrong").innerText =
+            "Wrong passcode 😅 Try again!";
+    }
+}
+
+
+function yesClicked(){
+
+    showPage("birthdayPage");
+
+}
+
+
+function noClicked(){
+
+    showPage("noPage");
+
+}
+
+
+function backToQuestion(){
+
+    showPage("questionPage");
+
+}
+
+
+function showSpecialMessage(){
+
+    showPage("messagePage");
+
+}
+
+
+function showMemories(){
+
+    showPage("memoriesPage");
+
+}
+
+
+function showFinal(){
+
+    showPage("finalPage");
+
+}
+
+</script>
+
+</body>
+</html>
