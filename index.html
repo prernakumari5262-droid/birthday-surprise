@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Birthday Surprise 💗</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+
+    background: repeating-linear-gradient(
+        0deg,
+        #ffffff 0px,
+        #ffffff 45px,
+        #f8d6df 45px,
+        #f8d6df 85px
+    );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.box {
+    width: 90%;
+    max-width: 420px;
+    background: rgba(255,255,255,0.96);
+    padding: 30px 20px;
+    border-radius: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+h1 {
+    color: #e75480;
+}
+
+.message {
+    color: #555;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.heart {
+    font-size: 55px;
+    animation: beat 1s infinite;
+}
+
+@keyframes beat {
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+input {
+    width: 85%;
+    padding: 14px;
+    border: 2px solid #e8a9bd;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    outline: none;
+}
+
+button {
+    border: none;
+    padding: 13px 25px;
+    margin: 10px 5px;
+    border-radius: 25px;
+    font-size: 17px;
+    background: #f48fb1;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #e75480;
+}
+
+.hidden {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 : PASSCODE -->
+
+<div class="box" id="passcodePage">
+
+    <div class="heart">💗</div>
+
+    <h1>Enter Passcode 🔐</h1>
+
+    <p class="message">
+        A little surprise is waiting for you... 🎀
+    </p>
+
+    <input
+        type="password"
+        id="passcode"
+        placeholder="Enter passcode"
+    >
+
+    <br>
+
+    <button onclick="checkPasscode()">
+        Unlock 💕
+    </button>
+
+    <p id="wrong" style="color:red;"></p>
+
+</div>
+
+
+<!-- PAGE 2 : YES / NO -->
+
+<div class="box hidden" id="questionPage">
+
+    <div class="heart">🎀</div>
+
+    <h1>Hey! 💗</h1>
+
+    <p class="message">
+        I have something special for you... 🥰
+        <br><br>
+        Are you ready for your surprise?
+    </p>
+
+    <button onclick="yesClicked()">
+        YES 💖
+    </button>
+
+    <button onclick="noClicked()">
+        NO 😶
+    </button>
+
+</div>
+
+
+<!-- PAGE 3 : YES -->
+
+<div class="box hidden" id="yesPage">
+
+    <div class="heart">🎉</div>
+
+    <h1>YAYYY! 💗</h1>
+
+    <p class="message">
+        You chose YES! 🥰
+        <br><br>
+
+        🎂 Happy Birthday! 🎂
+
+        <br><br>
+
+        You are a very special person to me. 💕
+        <br>
+        I hope your day is filled with happiness,
+        smiles and beautiful memories. 🌸
+    </p>
+
+    <button onclick="finalMessage()">
+        One More Surprise 💝
+    </button>
+
+</div>
+
+
+<!-- PAGE 4 : NO -->
+
+<div class="box hidden" id="noPage">
+
+    <div class="heart">🥺</div>
+
+    <h1>Are you sure? 😭</h1>
+
+    <p class="message">
+        Please think again... 🥹
+        <br><br>
+        There is a little surprise waiting for you! 💗
+    </p>
+
+    <button onclick="backToQuestion()">
+        Okay, YES 💖
+    </button>
+
+</div>
+
+
+<!-- PAGE 5 : FINAL -->
+
+<div class="box hidden" id="finalPage">
+
+    <div class="heart">💐</div>
+
+    <h1>Special Message 💗</h1>
+
+    <p class="message">
+        No matter where life takes you,
+        <br>
+        always keep smiling. 😊
+
+        <br><br>
+
+        You deserve lots of happiness. 💕
+
+        <br><br>
+
+        ✨ Stay Happy & Stay Amazing ✨
+    </p>
+
+</div>
+
+
+<script>
+
+function checkPasscode() {
+
+    const code = document.getElementById("passcode").value;
+
+    /*
+       YOUR PASSCODE
+       Change 1234 to whatever passcode you want.
+    */
+
+    if (code ==="2429") {
+
+        document.getElementById("passcodePage")
+            .classList.add("hidden");
+
+        document.getElementById("questionPage")
+            .classList.remove("hidden");
+
+    } else {
+
+        document.getElementById("wrong").innerText =
+            "Wrong passcode 😅 Try again!";
+    }
+}
+
+
+function yesClicked() {
+
+    document.getElementById("questionPage")
+        .classList.add("hidden");
+
+    document.getElementById("yesPage")
+        .classList.remove("hidden");
+}
+
+
+function noClicked() {
+
+    document.getElementById("questionPage")
+        .classList.add("hidden");
+
+    document.getElementById("noPage")
+        .classList.remove("hidden");
+}
+
+
+function backToQuestion() {
+
+    document.getElementById("noPage")
+        .classList.add("hidden");
+
+    document.getElementById("questionPage")
+        .classList.remove("hidden");
+}
+
+
+function finalMessage() {
+
+    document.getElementById("yesPage")
+        .classList.add("hidden");
+
+    document.getElementById("finalPage")
+        .classList.remove("hidden");
+}
+
+</script>
+
+</body>
+</html>
